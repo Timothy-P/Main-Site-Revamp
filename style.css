@@ -46,6 +46,7 @@ p {width: fit-content;}
     grid-template-columns: repeat(auto-fill, 100px);
 }
 .mainGrid div {
+    position: relative;
     width: 100%;
 }
 .mainGrid div img {
@@ -55,9 +56,4 @@ p {width: fit-content;}
 .mainGrid div p {
     position: relative;
     top: -35px;
-}
-
-/* Grid elements */
-#temp {
-    position: relative;
 }

@@ -1,3 +1,13 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+// Perminent stuff.
 function dragElement(elmnt) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     let elmnX = 0, elmnY = 0, xdiff = 0, ydiff = 0;
@@ -9,6 +19,10 @@ function dragElement(elmnt) {
         pos3 = e.clientX;
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
+        if (elmnt.dataset.left === undefined && elmnt.dataset.top === undefined) {
+            elmnt.dataset.left = "0";
+            elmnt.dataset.top = "0";
+        }
         if (elmnt.style.left.length === 0 && elmnt.style.top.length === 0) {
             elmnX = elmnt.clientLeft;
             elmnY = elmnt.clientTop;
@@ -41,30 +55,19 @@ function dragElement(elmnt) {
         elmnt.style.left = (e.clientX - xdiff) + "px";
     }
     function closeDragElement() {
-        console.log("Mouse up");
         // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
-        /*let phantom = create("","div",document.getElementById("mainGrid")!, "display:hidden; grid-row: 1; grid-column: 1; top: 0px; left: 0px;", "phantom");
-        console.log("Phantom created");
-        while (parseInt(elmnt.style.left.slice(0,-2)) > phantom.clientLeft) {
-            phantom.style.gridRow = (parseInt(phantom.style.gridRow)+1).toString()
-            console.log("Phantom row changed");
+        let newRow = Math.round((parseInt(elmnt.style.top.slice(0, -2)) + parseInt(elmnt.dataset.top)) / 100) + 1;
+        let newColumn = Math.round((parseInt(elmnt.style.left.slice(0, -2)) + parseInt(elmnt.dataset.left)) / 100) + 1;
+        if (newRow - (parseInt(elmnt.dataset.left) / 100) > 0.8 || newColumn - (parseInt(elmnt.dataset.top) / 100) > 0.8) {
+            elmnt.style.gridRow = newRow.toString();
+            elmnt.style.gridColumn = newColumn.toString();
+            elmnt.dataset.left = (parseInt(elmnt.style.left.slice(0, -2)) + parseInt(elmnt.dataset.left)).toString();
+            elmnt.dataset.top = (parseInt(elmnt.style.top.slice(0, -2)) + parseInt(elmnt.dataset.top)).toString();
         }
-        while (parseInt(elmnt.style.top.slice(0,-2)) > phantom.clientTop) {
-            phantom.style.gridColumn = (parseInt(phantom.style.gridColumn)+1).toString()
-            console.log("Phantom column changed");
-        }
-        elmnt.style.gridRow = phantom.style.gridRow;
-        console.log("Element row changed");
-        elmnt.style.gridColumn = phantom.style.gridColumn;
-        console.log("Element column changed")*/
-        let newRow = Math.floor(parseInt(elmnt.style.top.slice(0, -2)) / 100) + 1;
-        let newColumn = Math.floor(parseInt(elmnt.style.left.slice(0, -2)) / 100) + 1;
-        console.log(newRow);
-        console.log(newColumn);
-        elmnt.style.gridRow = newColumn.toString();
-        elmnt.style.gridColumn = newRow.toString();
+        elmnt.style.top = "0px";
+        elmnt.style.left = "0px";
     }
 }
 function create(content, elementType, target, styles, id) {
@@ -88,7 +91,50 @@ function create(content, elementType, target, styles, id) {
     target === null || target === void 0 ? void 0 : target.append(newDiv);
     return newDiv;
 }
+function menu(bodyContent, id, target) {
+    // Base
+    let body = create("", "div", target, "", id);
+    let header = create("", "header", body, "", id + "-header");
+    let footer = create("", "footer", body, "", id + "-footer");
+    let Close = create("", "div", header, "justify-content:end;", id + "close");
+    Close.onclick = function () {
+        // 
+        body.remove();
+    };
+}
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 window.addEventListener("DOMContentLoaded", function () {
-    dragElement(this.document.getElementById("temp"));
+    let i = 0;
+    for (let i = 0; i < this.document.getElementById("mainGrid").childElementCount; i++) {
+        dragElement(this.document.getElementById("mainGrid").children[i]);
+    }
+    //dragElement(this.document.getElementById("temp")!);
+    //dragElement(this.document.getElementById("Help")!);
+    fetchJSONData();
 });
+function errorhandle(e) {
+    // 
+    create(`${e}`, "div", document.getElementById("main"), `background:`, "errormenu");
+}
+this.document.getElementById("temp").addEventListener("dblclick", function (e) {
+    let target = e.target, parent = target.parentElement.parentElement;
+    alert("Temp double clicked");
+    menu("", "tempMenu", document.getElementById("main"));
+});
+let jsondata;
+// File system
+function fetchJSONData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch('./filesystem.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            jsondata = yield response.json(); // Set the global variable to the retrieved data
+        }
+        catch (error) {
+            errorhandle(error);
+        }
+    });
+}
+;
