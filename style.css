@@ -1,0 +1,63 @@
+/* Font */
+@font-face {
+    font-family: "w95font";
+    src: url("https://arnesava.github.io/w95font/assets/fonts/w95font.woff2") format("woff2"), url("https://arnesava.github.io/w95font/assets/fonts/w95font.woff") format("woff");
+    font-weight: normal;
+}
+  @font-face {
+    font-family: "w95font";
+    src: url("https://arnesava.github.io/w95font/assets/fonts/w95font-bold.woff2") format("woff2"), url("https://arnesava.github.io/w95font/assets/fonts/w95font-bold.woff") format("woff");
+    font-weight: bold;
+}
+
+
+/* Default stuff because browsers are annoying. */
+html {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    overflow-y: hidden;
+}
+
+body {
+    width: inherit;
+    height: inherit;
+    background-color: #008285;
+    font-family: "w95font";
+}
+main {
+    width: inherit;
+    height: inherit;
+}
+footer {
+    bottom:0%;
+    text-align: center;
+}
+p {width: fit-content;}
+
+
+/* Grid */
+.mainGrid {
+    width: inherit;
+    height: inherit;
+    display:grid;
+    column-gap: 5px;
+    row-gap: 5px;
+    grid-template-rows: repeat(auto-fill, 100px);
+    grid-template-columns: repeat(auto-fill, 100px);
+}
+.mainGrid div {
+    width: 100%;
+}
+.mainGrid div img {
+    width: 90%;
+    height: auto;
+}
+.mainGrid div p {
+    position: relative;
+    top: -35px;
+}
+
+/* Grid elements */
+#temp {
+    position: relative;
+}
