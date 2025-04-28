@@ -148,13 +148,13 @@ function create(content, elementType, target, styles, id) {
 ;
 function menu(bodyContent, id, target, e) {
     // Base
-    let body = create("", "div", target, `min-height: 50px; top: ${e.clientY}px; left: ${e.clientX}px; position: absolute; background: #ffffffff; min-width: 100px`, id);
-    let header = create("", "header", body, "min-height: 25px; border-color: 818182ff;", id + "-header");
+    let body = create("", "div", target, `min-height: 150px; top: ${e.clientY}px; left: ${e.clientX}px; position: absolute; background: #ffffffff; min-width: 150px`, id);
+    let header = create("", "header", body, "min-height: 25px; border-color: 818182ff; display: flex; background-color: aqua; justify-content:end;", id + "-header");
     let footer = create("", "footer", body, "min-height: 25px; border-color: 818182ff;", id + "-footer");
-    let Close = create("", "div", header, "justify-content:end;", id + "close");
+    let Close = create("", "div", header, "background-color: black; width: 25px; height: 25px;", id + "close");
     let closebutton = create("", "img", Close, "", "closebutton");
     //closebutton.attributes.item. = "./Icons/Cross.ico"
-    dragElement(header);
+    dragElement(body);
     Close.onclick = function () {
         // 
         body.remove();
