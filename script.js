@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // Perminent stuff.
 function dragElementSnap(elmnt) {
-    for (let i = 0; i < elmnt.children[0].children.length -1; i++;) {
+    for (let i = 0; i < elmnt.children[0].children.length; i++) {
         elmnt.children[0].children[i].setAttribute("draggable","false");
     }
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
