@@ -3,6 +3,9 @@ This is going to be my new primary site once it is finished. It generally follow
 
 As for the features, it's gonna take a while, so stay tuned.
 
+# Overview
+This is probably my most ambitious project yet, other than my project about [Tic-Tac-Toe](https://github.com/Timothy-P/Game). There's a lot I plan on doing, so there's no point in saying, "He'll give up in a couple of weeks," because I enjoy this.
+
 # Features
 I plan on having it move the icons, double click to open a window, and allow you to navigate a filesystem of sorts. Of course there's going to be a taskbar, but the other parts have me plenty preoccupied.
 
