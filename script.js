@@ -191,14 +191,20 @@ function create(content, elementType, target, styles, id) {
     return newDiv;
 }
 ;
-function menu(bodyContent, id, target, e) {
+function menu(bodyContent, id, target, bodyText, e) {
     // Base
     let wrapper = create("", "div", target, `height: 150px; top: ${e.clientY}px; left: ${e.clientX}px; position: absolute; background: #ffffffff; width: 300px`, id);
     let header = create("", "header", wrapper, "height: 25px;border-bottom: #818182ff solid 3px;display: flex;background-color: #c2c2c2ff;justify-content: end;top: 0px;left: 0px;", id + "-header");
-    let body = create("", "div", wrapper, "height: 94px;width: -webkit-fill-available;", id + "-body");
+    let body = create("", "div", wrapper, "height: 94px;width: -webkit-fill-available; overflow: scroll; padding: 5px;", id + "-body");
     let footer = create("", "div", wrapper, "width: -webkit-fill-available;min-height: 25px;background: #c2c2c2ff;border-top: #818182ff solid 3px;", id + "-footer");
+
+    //Menu buttons
     let Close = create("", "div", header, "justify-content:end;height: -webkit-fill-available;", id + "close");
     let closebutton = create("", "img", Close, "height: -webkit-fill-available; padding: 5px;", "closebutton");
+
+    // Body content
+    body.innerHTML = bodyText;
+    
     dragMenu(header);
     closebutton.setAttribute("src", "./Icons/WindowCross.png");
     Close.onclick = function () {
@@ -223,7 +229,11 @@ function errorhandle(e) {
 ;
 this.document.getElementById("temp").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
-    menu("", "tempMenu", document.getElementById("main"), e) ? console.log("Menu created") : console.log("Menu not created");
+    menu("", "tempMenu", document.getElementById("main"), "", e) ? console.log("Menu created") : console.log("Menu not created");
+});
+this.document.getElementById("Help").addEventListener("dblclick", function (e) {
+    let target = e.target, parent = target.parentElement.parentElement;
+    menu("", "HelpMenu", document.getElementById("main"), jsondata.Help, e) ? console.log("Menu created") : console.log("Menu not created");
 });
 let jsondata;
 // File system
