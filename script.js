@@ -231,7 +231,7 @@ this.document.getElementById("temp").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
     menu("", "tempMenu", document.getElementById("main"), "", e) ? console.log("Menu created") : console.log("Menu not created");
 });
-this.document.getElementById("Help").addEventListener("dblclick", function (e) {
+this.document.getElementById("help").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
     menu("", "HelpMenu", document.getElementById("main"), jsondata.Help, e) ? console.log("Menu created") : console.log("Menu not created");
 });
