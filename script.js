@@ -227,13 +227,34 @@ function errorhandle(e) {
     create(`${e}`, "div", document.getElementById("main"), `background:`, "errormenu");
 }
 ;
+function createIcon(name, iconImage, target, id) {
+    if (target) {
+        const iconDiv = create("","div",target,"height: fit-content; max-height: 100px; width: fit-content; max-width: 100px; display: inline-block; padding: 10px;",id+"-main");
+        const iconDivImage = create("","img",iconDiv,"height: 60px;",id+"-icon");
+        iconDivImage.setAttribute("src",iconImage);
+        iconDivImage.setAttribute("draggable","false");
+        const iconDivName = create(name,"p",iconDiv,"position: relative; width: -webkit-fill-available; justify-content: center; display: flex; top: -18px; height: fit-content; padding: 0px;",id+"-text");
+        iconDiv.addEventListener("dblclick", function (e) {
+            alert(e.target)
+        });
+    
+        // Fix overflow
+        iconDiv.parentElement.style.overflow = "hidden";
+        
+        return iconDiv;
+    };
+};
+
 this.document.getElementById("temp").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
-    menu("", "tempMenu", document.getElementById("main"), "", e) ? console.log("Menu created") : console.log("Menu not created");
+    menu("", "tempMenu", document.getElementById("main"), "", e);
 });
 this.document.getElementById("help").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
-    menu("", "HelpMenu", document.getElementById("main"), jsondata.Help, e) ? console.log("Menu created") : console.log("Menu not created");
+    menu("", "HelpMenu", document.getElementById("main"), jsondata.Help, e);
+    for (const key in jsondata) {
+        createIcon(key,"./Icons/Documents Folder.ico",document.getElementById("tempMenu-body"),key);
+    };
 });
 let jsondata;
 // File system
