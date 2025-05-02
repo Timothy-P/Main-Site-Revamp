@@ -248,13 +248,13 @@ function createIcon(name, iconImage, target, id) {
 this.document.getElementById("temp").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
     menu("", "tempMenu", document.getElementById("main"), "", e);
+    for (const key in jsondata) {
+        createIcon(key,"./Icons/Documents Folder.ico",document.getElementById("tempMenu-body"),key);
+    };
 });
 this.document.getElementById("help").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
     menu("", "HelpMenu", document.getElementById("main"), jsondata.Help, e);
-    for (const key in jsondata) {
-        createIcon(key,"./Icons/Documents Folder.ico",document.getElementById("tempMenu-body"),key);
-    };
 });
 let jsondata;
 // File system
