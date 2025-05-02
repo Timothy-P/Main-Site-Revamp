@@ -12,7 +12,7 @@ I plan on having it move the icons, double click to open a window, and allow you
 # Minor Issues
 While working and showing friends what I've been doing, I noticed that on my low-resource computer, it didn't work as well. So as a recommendation, try to have more CPU and RAM power on standby than a small amount.
 
-The help icon doesn't work, as I'm trying to get the styling for the menus working. Once I do get it working, I'll put it here.
+The help icon does work now. However, as I have done, I forgot to upload the image for the delete button, so it'll just be the standard default for now.
 
 # Thank You
 And thank you for reading this. It hasn't taken a lot of time to get here, so the most I can ask of you is to stick around.
