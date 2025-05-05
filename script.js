@@ -244,7 +244,9 @@ function createIcon(name, iconImage, target, id) {
             else {
             	parent.setAttribute("dataset-location", "");
             };
+            spot = spot[iconDiv.id.split("-")[0]];
             for (key in spot) {
+                target.innerHTML = ""
             	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
             };
         });
