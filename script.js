@@ -235,7 +235,18 @@ function createIcon(name, iconImage, target, id) {
         iconDivImage.setAttribute("draggable","false");
         const iconDivName = create(name,"p",iconDiv,"position: relative; width: -webkit-fill-available; justify-content: center; display: flex; top: -18px; height: fit-content; padding: 0px;",id+"-text");
         iconDiv.addEventListener("dblclick", function (e) {
-            alert(e.target)
+            const parent = e.target.parentElement.parentElement;
+            
+            let spot = jsondata;
+            if (parent.getAttribute("dataset-location")) {
+            	spot = spot[item];
+            }
+            else {
+            	parent.setAttribute("dataset-location", "");
+            };
+            for (key in spot) {
+            	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
+            };
         });
     
         // Fix overflow
