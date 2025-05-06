@@ -240,8 +240,11 @@ function createIcon(name, iconImage, target, id) {
             let spot = jsondata;
             let location = "";
             if (parent.getAttribute("dataset-location")) {
-            	spot = spot[item];
-	            location += `${item}/`;
+                for (item in parent.getAttribute("dataset-location").split("/")) {
+    			    spot = spot[item];
+    	        	location += `${item}/`;
+                };
+		}
             }
             else {
             	parent.setAttribute("dataset-location", "");
