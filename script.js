@@ -238,17 +238,21 @@ function createIcon(name, iconImage, target, id) {
             const parent = e.target.parentElement.parentElement;
             
             let spot = jsondata;
+            let location = "";
             if (parent.getAttribute("dataset-location")) {
             	spot = spot[item];
+	            location += `${item}/`;
             }
             else {
             	parent.setAttribute("dataset-location", "");
             };
             spot = spot[iconDiv.id.split("-")[0]];
+            location += `${iconDiv.id.split("-")[0]}/`;
             target.innerHTML = "";
             for (key in spot) {
             	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
             };
+            parent.setAttribute("dataset-location",location);
         });
     
         // Fix overflow
