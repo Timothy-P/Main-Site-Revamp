@@ -244,7 +244,6 @@ function createIcon(name, iconImage, target, id) {
     			    spot = spot[item];
     	        	location += `${item}/`;
                 };
-		}
             }
             else {
             	parent.setAttribute("dataset-location", "");
