@@ -210,6 +210,7 @@ function menu(bodyContent, id, target, bodyText, e) {
     closebutton.setAttribute("src", "./Icons/WindowCross.png");
     Close.onclick = function () {
         wrapper.remove();
+        locationA = "";
     };
     return true;
 }
@@ -228,6 +229,7 @@ function errorhandle(e) {
     create(`${e}`, "div", document.getElementById("main"), `background:`, "errormenu");
 }
 ;
+var locationA = "";
 function createIcon(name, iconImage, target, id) {
     if (target) {
         const iconDiv = create("","div",target,"height: fit-content; max-height: 100px; width: fit-content; max-width: 100px; display: inline-block; padding: 10px;",id+"-main");
@@ -239,10 +241,8 @@ function createIcon(name, iconImage, target, id) {
             const parent = e.target.parentElement.parentElement;
             
             let spot = jsondata;
-            let location = "";
             if (parent.getAttribute("dataset-location")) {
                 for (item in parent.getAttribute("dataset-location").split("/")) {
-                    console.log(item);
                     if (parent.getAttribute("dataset-location").split("/")[item].length > 0) {
                         spot = spot[parent.getAttribute("dataset-location").split("/")[item]];
                     };
@@ -252,13 +252,16 @@ function createIcon(name, iconImage, target, id) {
             	parent.setAttribute("dataset-location", "");
             };
             spot = spot[iconDiv.id.split("-")[0]];
-            location += `${iconDiv.id.split("-")[0]}/`;
+            console.log(locationA)
+            locationA += `${iconDiv.id.split("-")[0]}/`;
             target.innerHTML = "";
             for (key in spot) {
             	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
             };
-            parent.setAttribute("dataset-location",location);
-            e.target.parentElement.parentElement.parentElement.children[0].children[0].innerText = "C:/"+location;
+            parent.setAttribute("dataset-location",locationA);
+            console.log(locationA)
+            console.log(spot)
+            parent.parentElement.children[0].children[0].innerText = "C:/"+parent.getAttribute("dataset-location");
         });
     
         // Fix overflow
