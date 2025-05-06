@@ -241,8 +241,10 @@ function createIcon(name, iconImage, target, id) {
             let location = "";
             if (parent.getAttribute("dataset-location")) {
                 for (item in parent.getAttribute("dataset-location").split("/")) {
-    			    spot = spot[item];
-    	        	location += `${item}/`;
+                    console.log(item);
+                    if (parent.getAttribute("dataset-location").split("/")[item].length > 0) {
+                        spot = spot[parent.getAttribute("dataset-location").split("/")[item]];
+                    };
                 };
             }
             else {
