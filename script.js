@@ -199,6 +199,7 @@ function menu(bodyContent, id, target, bodyText, e) {
     let footer = create("", "div", wrapper, "width: -webkit-fill-available;min-height: 25px;background: #c2c2c2ff;border-top: #818182ff solid 3px;", id + "-footer");
 
     //Menu buttons
+    let headerText = create("","p",header,"display: flex; justify-content: left; width: -webkit-fill-available; height: -webkit-fill-available; align-items: center; padding: 0px 0px 0px 5px; ","title");
     let Close = create("", "div", header, "justify-content:end;height: -webkit-fill-available;", id + "close");
     let closebutton = create("", "img", Close, "height: -webkit-fill-available; padding: 5px;", "closebutton");
 
@@ -257,6 +258,7 @@ function createIcon(name, iconImage, target, id) {
             	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
             };
             parent.setAttribute("dataset-location",location);
+            e.target.parentElement.parentElement.parentElement.children[0].children[0].innerText = "C:/"+location;
         });
     
         // Fix overflow
