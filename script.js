@@ -255,17 +255,19 @@ function createIcon(name, iconImage, target, id) {
             console.log(locationA)
             locationA += `${iconDiv.id.split("-")[0]}/`;
             target.innerHTML = "";
-            for (key in spot) {
-            	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
+            if (typeof spot === "object") {
+                for (key in spot) {
+                	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
+                };
+            }
+            else {
+                iconDiv.parentElement.innerHTML = spot;
             };
             parent.setAttribute("dataset-location",locationA);
             console.log(locationA)
             console.log(spot)
             parent.parentElement.children[0].children[0].innerText = "C:/"+parent.getAttribute("dataset-location");
         });
-    
-        // Fix overflow
-        iconDiv.parentElement.style.overflow = "hidden";
         
         return iconDiv;
     };
