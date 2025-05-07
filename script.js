@@ -252,7 +252,6 @@ function createIcon(name, iconImage, target, id) {
             	parent.setAttribute("dataset-location", "");
             };
             spot = spot[iconDiv.id.split("-")[0]];
-            console.log(locationA)
             locationA += `${iconDiv.id.split("-")[0]}/`;
             target.innerHTML = "";
             if (typeof spot === "object") {
@@ -261,11 +260,23 @@ function createIcon(name, iconImage, target, id) {
                 };
             }
             else {
-                iconDiv.parentElement.innerHTML = spot;
+                let mainDiv = parent.parentElement;
+                
+                let event = new MouseEvent('dblclick', {
+                    'view': window,
+                    'bubbles': true,
+                    'cancelable': true
+                  });
+                document.getElementById('help').dispatchEvent(event);
+                let Helpmenu = document.getElementById("HelpMenu");
+
+                Helpmenu.setAttribute("data-left",mainDiv.getAttribute("data-left"));
+                Helpmenu.setAttribute("data-top",mainDiv.getAttribute("data-top"));
+                Helpmenu.style.left = mainDiv.style.left;
+                Helpmenu.style.top = mainDiv.style.top;
+                mainDiv.remove();
             };
             parent.setAttribute("dataset-location",locationA);
-            console.log(locationA)
-            console.log(spot)
             parent.parentElement.children[0].children[0].innerText = "C:/"+parent.getAttribute("dataset-location");
         });
         
