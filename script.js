@@ -193,13 +193,13 @@ function create(content, elementType, target, styles, id) {
 ;
 function menu(bodyContent, id, target, bodyText, e) {
     // Base
-    let wrapper = create("", "div", target, `height: 150px; top: ${e.clientY}px; left: ${e.clientX}px; position: absolute; background: #ffffffff; width: 350px`, id);
+    let wrapper = create("", "div", target, `min-height: 150px; top: ${e.clientY}px; left: ${e.clientX}px; position: absolute; background: #ffffffff; min-width: 350px;`, id);
     let header = create("", "header", wrapper, "height: 25px;border-bottom: #818182ff solid 3px;display: flex;background-color: #c2c2c2ff;justify-content: end;top: 0px;left: 0px;", id + "-header");
-    let body = create("", "div", wrapper, "height: 94px;width: -webkit-fill-available; overflow: scroll; padding: 5px;", id + "-body");
+    let body = create(bodyContent, "div", wrapper, "min-height: 94px; min-width: -webkit-fill-available; overflow: scroll; padding: 5px; resize: both; scrollbar-width: thin;", id + "-body");
     let footer = create("", "div", wrapper, "width: -webkit-fill-available;min-height: 25px;background: #c2c2c2ff;border-top: #818182ff solid 3px;", id + "-footer");
 
     //Menu buttons
-    let headerText = create("C:/","p",header,"display: flex; justify-content: left; width: -webkit-fill-available; height: -webkit-fill-available; align-items: center; padding: 0px 0px 0px 5px; ","title");
+    let headerText = create("","p",header,"display: flex; justify-content: left; width: -webkit-fill-available; height: -webkit-fill-available; align-items: center; padding: 0px 0px 0px 5px; ","title");
     let Close = create("", "div", header, "justify-content:end;height: -webkit-fill-available;", id + "close");
     let closebutton = create("", "img", Close, "height: -webkit-fill-available; padding: 5px;", "closebutton");
 
@@ -256,11 +256,25 @@ function createIcon(name, iconImage, target, id) {
             target.innerHTML = "";
             if (typeof spot === "object") {
                 for (key in spot) {
-                	createIcon(key,"./Icons/Documents Folder.ico",parent,key);
+                    if (typeof spot[key] === "object") {
+                	    createIcon(key,"./Icons/Documents Folder.ico",parent,key);
+                        console.log(key);
+                        console.log(typeof spot[key]);
+                        console.log(typeof key);
+                    }
+                    else {
+                        createIcon(key,"./Icons/WordPad sheet.ico",parent,key);
+                    }
                 };
+                /*
+                for (key in jsondata) {
+                    console.log(typeof jsondata[key]);
+                    console.log(key)
+                };
+                */
             }
             else {
-                let mainDiv = parent.parentElement;
+                /*let mainDiv = parent.parentElement;
                 
                 let event = new MouseEvent('dblclick', {
                     'view': window,
@@ -274,10 +288,14 @@ function createIcon(name, iconImage, target, id) {
                 Helpmenu.setAttribute("data-top",mainDiv.getAttribute("data-top"));
                 Helpmenu.style.left = mainDiv.style.left;
                 Helpmenu.style.top = mainDiv.style.top;
-                mainDiv.remove();
+                mainDiv.remove();*/
+                parent.innerHTML = `<p>${spot}</p>`;
             };
             parent.setAttribute("dataset-location",locationA);
-            parent.parentElement.children[0].children[0].innerText = "C:/"+parent.getAttribute("dataset-location");
+            parent.parentElement.children[0].children[0].innerText = parent.getAttribute("dataset-location");
+            console.log(`locationA: ${locationA}`);
+            console.log(`dataset-location: ${parent.getAttribute("dataset-location")}`);
+            console.log(`spot: ${spot}`);
         });
         
         return iconDiv;
@@ -297,7 +315,7 @@ this.document.getElementById("help").addEventListener("dblclick", function (e) {
 });
 let jsondata;
 // File system
-function fetchJSONData() {
+async function fetchJSONData() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch('./filesystem.json');
