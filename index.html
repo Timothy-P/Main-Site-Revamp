@@ -8,6 +8,7 @@
     <meta name="author" content="Timothy-P">
     <meta name="robots" content="nosnippet, noindex, nofollow">
     <meta name="font" content="https://arnesava.github.io/w95font/assets/fonts/w95font.woff2">
+    <meta> 
 
     <title>Timothy-P's official site</title>
     <link rel="stylesheet" href="style.css">
@@ -16,29 +17,59 @@
 </head>
 <body>
     <main id="main">
+        <!-- The "desktop" -->
         <div id="mainGrid" class="mainGrid">
-            <div id="temp" style="grid-row: 1; grid-column: 1;">
+            <div id="files" style="grid-row: 1; grid-column: 1;">
                 <center>
-                    <img src="./Icons/Documents Folder.ico" title="Temporary icon" alt="Temporary icon">
-                    <p>
-                        Icon
+                    <img style="width: 73%" src="./Icons/Computer with programs.ico" title="My Computer" alt="Computer with programs on screen">
+                    <p style="top: 1px">
+                         My Computer
                     </p>
                 </center>
             </div>
             <div id="help" style="grid-row: 1; grid-column: 2;">
                 <center>
-                    <img style="width:70%" src="./Help page.ico" title="Help" alt="Help icon">
-                    <p style="top: -16px">
+                    <img style="width:70%" src="./Icons/Help page.ico" title="Help" alt="Help icon">
+                    <p style="top: 3px">
                         Help.txt
                     </p>
                 </center>
-                <!-- 
-                 -->
             </div>
         </div>
+
+        <!-- Taskbar (doesn't display tasks as of right now) -->
+        <div id="taskbar">
+            <div>
+                <img alt="win 95 icon without text" src="./Icons/Windows logo (without text).ico">
+                <p>Start</p>
+            </div>
+            <div id="tasks">
+
+            </div>
+            <div id="clock">
+                <p>12:00</p>
+            </div>
+        </div>
+
+        <!-- Context menu -->
+        <div id="menu">
+            <a href="#">
+            <img src="http://puu.sh/nr60s/42df867bf3.png" /> AdBlock Plus <span>Ctrl + ?!</span>
+            </a>
+            <a href="#">
+            <img src="http://puu.sh/nr5Z6/4360098fc1.png" /> SNTX <span>Ctrl + ?!</span>
+            </a>
+            <hr />
+            <a href="#">
+            <i class="fa fa-fort-awesome"></i> Fort Awesome <span>Ctrl + ?!</span>
+            </a>
+            <a href="#">
+            <i class="fa fa-flag"></i> Font Awesome <span>Ctrl + ?!</span>
+            </a>
+        </div>
     </main>
-    <footer>
+    <!--<footer>
         <p>&copy; 2025 Timothy-P. All rights reserved.</p>
-    </footer>
+    </footer>-->
 </body>
 </html>

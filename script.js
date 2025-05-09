@@ -223,13 +223,14 @@ window.addEventListener("DOMContentLoaded", function () {
     //dragElement(this.document.getElementById("temp")!);
     //dragElement(this.document.getElementById("Help")!);
     fetchJSONData();
+    this.setInterval(Clock, 100);
 });
 function errorhandle(e) {
     // 
     create(`${e}`, "div", document.getElementById("main"), `background:`, "errormenu");
 }
 ;
-var locationA = "";
+let locationA = "";
 function createIcon(name, iconImage, target, id) {
     if (target) {
         const iconDiv = create("","div",target,"height: fit-content; max-height: 100px; width: fit-content; max-width: 100px; display: inline-block; padding: 10px;",id+"-main");
@@ -293,16 +294,13 @@ function createIcon(name, iconImage, target, id) {
             };
             parent.setAttribute("dataset-location",locationA);
             parent.parentElement.children[0].children[0].innerText = parent.getAttribute("dataset-location");
-            console.log(`locationA: ${locationA}`);
-            console.log(`dataset-location: ${parent.getAttribute("dataset-location")}`);
-            console.log(`spot: ${spot}`);
         });
         
         return iconDiv;
     };
 };
 
-this.document.getElementById("temp").addEventListener("dblclick", function (e) {
+this.document.getElementById("files").addEventListener("dblclick", function (e) {
     let target = e.target, parent = target.parentElement.parentElement;
     menu("", "tempMenu", document.getElementById("main"), "", e);
     for (const key in jsondata) {
@@ -318,7 +316,7 @@ let jsondata;
 async function fetchJSONData() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch('./filesystem.json');
+            const response = yield fetch('./json/filesystem.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -330,3 +328,54 @@ async function fetchJSONData() {
     });
 }
 ;
+// Taskbar clock
+function Clock() {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    document.getElementById('clock').children[0].innerText = strTime;
+};
+
+// Context menu
+var i = document.getElementById("menu").style;
+if (document.addEventListener) {
+  document.addEventListener('contextmenu', function(e) {
+    var posX = e.clientX;
+    var posY = e.clientY;
+    menu(posX, posY);
+    e.preventDefault();
+  }, false);
+  document.addEventListener('click', function(e) {
+    i.opacity = "0";
+    setTimeout(function() {
+      i.visibility = "hidden";
+    }, 501);
+  }, false);
+} else {
+  document.attachEvent('oncontextmenu', function(e) {
+    var posX = e.clientX;
+    var posY = e.clientY;
+    menu(posX, posY);
+    e.preventDefault();
+  });
+  document.attachEvent('onclick', function(e) {
+    i.opacity = "0";
+    setTimeout(function() {
+      i.visibility = "hidden";
+    }, 501);
+  });
+}
+
+function menu(x, y) {
+  i.top = y + "px";
+  i.left = x + "px";
+  i.visibility = "visible";
+  i.opacity = "1";
+}
