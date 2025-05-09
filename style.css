@@ -120,7 +120,7 @@ p {width: fit-content; margin-block: 0px;}
 
 
 /* Custom context menu */
-#menu {
+/*#menu {
     visibility: hidden;
     opacity: 0;
     position: fixed;
@@ -172,4 +172,4 @@ p {width: fit-content; margin-block: 0px;}
 #menu hr {
     border: 1px solid #EBEBEB;
     border-bottom: 0;
-}
+}*/
