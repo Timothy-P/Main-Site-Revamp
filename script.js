@@ -344,7 +344,7 @@ function Clock() {
 };
 
 // Context menu
-var i = document.getElementById("menu").style;
+/*var i = document.getElementById("menu").style;
 if (document.addEventListener) {
   document.addEventListener('contextmenu', function(e) {
     var posX = e.clientX;
@@ -378,4 +378,4 @@ function menu(x, y) {
   i.left = x + "px";
   i.visibility = "visible";
   i.opacity = "1";
-}
+}*/
