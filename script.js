@@ -224,7 +224,30 @@ window.addEventListener("DOMContentLoaded", function () {
     //dragElement(this.document.getElementById("Help")!);
     fetchJSONData();
     this.setInterval(Clock, 100);
+
+    // Context menu
+    if (document.addEventListener) {
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+            console.log(e.target);
+            let posX = e.clientX;
+            let posY = e.clientY;
+            //menu(posX, posY);
+            i.style.top = e.clientY + "px";
+            i.style.left = e.clientX + "px";
+            console.log("Context menu triggered on: " + e.target);
+        
+        }, false);
+        document.addEventListener('click', function(e) {
+            i.opacity = "0";
+            setTimeout(function() {
+                i.visibility = "hidden";
+            }, 501);
+        }, false);
+    };
 });
+
+// Error handling
 function errorhandle(e) {
     // 
     create(`${e}`, "div", document.getElementById("main"), `background:`, "errormenu");
@@ -343,39 +366,34 @@ function Clock() {
     document.getElementById('clock').children[0].innerText = strTime;
 };
 
-// Context menu
-/*var i = document.getElementById("menu").style;
-if (document.addEventListener) {
-  document.addEventListener('contextmenu', function(e) {
-    var posX = e.clientX;
-    var posY = e.clientY;
-    menu(posX, posY);
-    e.preventDefault();
-  }, false);
-  document.addEventListener('click', function(e) {
-    i.opacity = "0";
-    setTimeout(function() {
-      i.visibility = "hidden";
-    }, 501);
-  }, false);
-} else {
-  document.attachEvent('oncontextmenu', function(e) {
-    var posX = e.clientX;
-    var posY = e.clientY;
-    menu(posX, posY);
-    e.preventDefault();
-  });
-  document.attachEvent('onclick', function(e) {
-    i.opacity = "0";
-    setTimeout(function() {
-      i.visibility = "hidden";
-    }, 501);
-  });
+// Context menu functions
+let i = document.getElementById("menu").style;
+let mainGrid = document.getElementById("mainGrid");
+function menu(x, y) {
+    i.style.top = y + "px`";
+    i.style.left = x + "px";
+    i.visibility = "visible";
+    i.opacity = "1";
+    }
+
+function closeWindow(e) {
+    console.log(e);
 }
 
-function menu(x, y) {
-  i.top = y + "px";
-  i.left = x + "px";
-  i.visibility = "visible";
-  i.opacity = "1";
-}*/
+// Click functions for testing
+function doubleClick(element) {
+    let event = new MouseEvent('dblclick', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+    });
+    element.dispatchEvent(event);
+};
+function rightClick(element) {
+    let event = new MouseEvent('contextmenu', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+    });
+    element.dispatchEvent(event);
+};
